@@ -1,0 +1,1 @@
+ Dizipal video oncesi reklamlari gecmek icin bir user script
