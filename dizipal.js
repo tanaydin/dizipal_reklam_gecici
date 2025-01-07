@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         Dizipal video oncesi reklam gecici ve reklam kapatici.
+// @name         Dizipal video oncesi reklam gecici
 // @version      2024-02-03
 // @namespace    https://dizipal845.com/
-// @description  Dizipal video oncesi reklamlari gecmek ve reklamlari kapamak icin bir user script
-// @author       tanaydin
-// @include      https://dizipal*.com/*
+// @description  Dizipal video oncesi reklamlari gecmek icin bir user script
+// @author       You
+// @include        https://dizipal*.com/*
 // @icon         https://dizipal845.com/favicon-32x32.png
 // @grant        none
 // ==/UserScript==
@@ -16,11 +16,10 @@
         removeElementsByClass("bb");
 
         let skipButton = document.getElementById("skipButton");
+        console.log(skipButton);
         if (skipButton) {
             if (skipButton.style.display == "none") {
-                if (document.readyState == "loading") {
-                    window.setTimeout(dizipalClean, 500);
-                }
+                    window.setTimeout(dizipalClean, 1000);
             } else {
                 skipButton.removeAttribute("disabled");
                 skipButton.click();
