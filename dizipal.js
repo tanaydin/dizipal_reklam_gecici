@@ -16,7 +16,6 @@
         removeElementsByClass("bb");
 
         let skipButton = document.getElementById("skipButton");
-        console.log(skipButton);
         if (skipButton) {
             if (skipButton.style.display == "none") {
                     window.setTimeout(dizipalClean, 1000);
