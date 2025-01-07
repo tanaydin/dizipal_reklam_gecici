@@ -1,34 +1,43 @@
 // ==UserScript==
-// @name         Dizipal video oncesi reklam gecici
-// @namespace    http://dizipal732.com/
+// @name         Dizipal video oncesi reklam gecici ve reklam kapatici.
 // @version      2024-02-03
-// @description  Dizipal video oncesi reklamlari gecmek icin bir user script
-// @author       You
-// @match        https://dizipal*
-// @icon         https://dizipal732.com/favicon-32x32.png
+// @namespace    https://dizipal845.com/
+// @description  Dizipal video oncesi reklamlari gecmek ve reklamlari kapamak icin bir user script
+// @author       tanaydin
+// @include      https://dizipal*.com/*
+// @icon         https://dizipal845.com/favicon-32x32.png
 // @grant        none
 // ==/UserScript==
 
 
 (function() {
-  'use strict';
+    'use strict';
+    function dizipalClean() {
+        removeElementsByClass("bb");
 
-  function dizipalClean() {
-      let skipButton = document.getElementById("skipButton");
+        let skipButton = document.getElementById("skipButton");
+        if (skipButton) {
+            if (skipButton.style.display == "none") {
+                if (document.readyState == "loading") {
+                    window.setTimeout(dizipalClean, 500);
+                }
+            } else {
+                skipButton.removeAttribute("disabled");
+                skipButton.click();
+                window.setTimeout(dizipalClean, 250);
+            }
+        }
 
-      if (skipButton) {
-          if (skipButton.style.display == "none") {
-              window.setTimeout(dizipalClean, 2000);
-          } else {
-              skipButton.removeAttribute("disabled");
-              skipButton.click();
-              window.setTimeout(dizipalClean, 250);
-          }
-      }
-  }
-  if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", dizipalClean);
-  } else {
-      dizipalClean();
-  }
+    }
+    function removeElementsByClass(className){
+        const elements = document.getElementsByClassName(className);
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", dizipalClean);
+    } else {
+        dizipalClean();
+    }
 })();
